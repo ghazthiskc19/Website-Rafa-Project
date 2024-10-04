@@ -1,0 +1,35 @@
+@tailwind components;
+@tailwind base;
+@tailwind utilities;
+
+@layer base{
+    @font-face{
+        font-family: 'Vremenagrotesk';
+        src: url('WebFonts/vremenagrotesk_bold_macroman/vremenagroteskbold-webfont.woff2') format('woff2'),
+             url('WebFonts/vremenagrotesk_bold_macroman/vremenagroteskbold-webfont.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'Vremenagrotesk';
+        src: url('WebFonts/vremenagrotesk_book_macroman/vremenagroteskbook-webfont.woff2') format('woff2'),
+             url('WebFonts/vremenagrotesk_book_macroman/vremenagroteskbook-webfont.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'Vremenagrotesk';
+        src: url('WebFonts/vremenagrotesk_medium_macroman/vremenagroteskmedium-webfont.woff2') format("woff2"),
+             url('WebFonts/vremenagrotesk_medium_macroman/vremenagroteskmedium-webfont.woff') format('woff');
+        
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'Vremenagrotesk';
+        src: url('WebFonts/vremenagrotesk_regular_macroman/vremenagrotesk-webfont.woff2') format("woff2"),
+             url('WebFonts/vremenagrotesk_regular_macroman/vremenagrotesk-webfont.woff') format("woff");
+        font-weight: normal;
+        font-style: normal;
+    }
+}
