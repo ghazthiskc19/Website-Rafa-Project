@@ -1,0 +1,9 @@
+.quote::before, .quote::after{
+    content: '';
+    display: block;
+    background-image: url("./src/image/quote.png");
+}
+
+.quote::after{
+    background-image: url("./src/image/double-quote.png");
+}

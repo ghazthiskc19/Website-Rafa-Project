@@ -1,0 +1,39 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp/
+.pnp.js
+.pnpm-store/
+package-lock.json
+yarn.lock # Kecuali jika kamu ingin melacaknya untuk konsistensi versi
+
+# Build artifacts
+dist/
+build/
+.cache/
+.parcel-cache/ # Untuk Parcel bundler
+public/build/ # Jika kamu punya folder build di dalam public
+
+# Tailwind CSS
+tailwind.config.js # Kecuali jika kamu ingin melacak perubahan konfigurasi
+postcss.config.js # Kecuali jika kamu ingin melacak perubahan konfigurasi
+.tailwindcss/ # Folder cache Tailwind JIT/AOT
+
+# Editor/IDE specific
+.idea/ # IntelliJ IDEA
+.vscode/ # VS Code
+*.iml # IntelliJ IDEA
+.DS_Store # macOS
+Thumbs.db # Windows
+
+# Log files
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
