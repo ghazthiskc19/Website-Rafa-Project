@@ -82,7 +82,7 @@ screenScroll.forEach((textEachScreen, indexScreen) =>{
     if(svgPath == null) return;
     if(indexScreen == 2){
       startValue = "50% 80%";
-      endValue = "100% 80%";
+      endValue = "120% 80%";
     }else if(indexScreen == 4){ 
       startValue = "-50% center";
       endValue = "30% center";
