@@ -1,8 +1,11 @@
 const mainContainer = document.querySelector('.main-container');
 const screenScroll = document.querySelectorAll('.screen-scroll');
 const svgScroll = document.querySelector('.svg-animate');
-console.log(svgScroll);
 const lastSection = screenScroll[screenScroll.length - 1];
+const tlWrapper = document.querySelector('.tl-wrapper');
+const aboutWrapper = document.querySelector('.about-me');
+const slideFix = gsap.utils.toArray('.about-me .slide-fix'); 
+
 const lenis = new Lenis();
 function raf(time) {
   lenis.raf(time)
@@ -13,111 +16,94 @@ requestAnimationFrame(raf);
 gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, MotionPathPlugin);
 let scrollLength = 12;
 
-let mainTimeline = gsap.timeline({
+let masterTimeline = gsap.timeline({
   scrollTrigger: {
-    trigger: '.main-container',
+    trigger: tlWrapper,
     pin: true,
     start: 'top top',
-    end: `+=${scrollLength * window.innerWidth}`,
-    scrub: true
+    end: `+=${mainContainer.offsetWidth + (aboutWrapper.offsetWidth * slideFix.length - 1)}`,
+    scrub: true,
+    // markers: true,
+    // markers: {startColor: "red", endColor: "red", fontSize: "18px"}, 
   }
 })
 
-mainTimeline.to(screenScroll, {
-  xPercent: -100 * (screenScroll.length - 1),
+masterTimeline.to(screenScroll, {
+  xPercent: -100 * (screenScroll.length),
   ease: 'none',
-  duration: screenScroll.length,
+  duration: 100
 }, 'horizontal-scroll')
 
-mainTimeline.to(lastSection, {
-})
 
 const svgPathFirst = screenScroll[0].querySelector('.svg-path')
-mainTimeline.from(svgPathFirst, {
+masterTimeline.from(svgPathFirst, {
   drawSVG: 0,
   ease: "none",
-  duration: 2
+  duration: 5
 }, 'horizontal-scroll')
 
-let startValue;
-let endValue;
+masterTimeline.to(lastSection, {
+})
+
+slideFix.forEach(slide => {
+  masterTimeline.to(slide, {
+      clipPath: "ellipse(100% 140% at 50% 50%)",
+      // markers: true,
+      id: "kampret",
+      duration: 10
+  });
+});
+
 screenScroll.forEach((textEachScreen, indexScreen) =>{
   if(textEachScreen != screenScroll[0]){
-    const textScreen = textEachScreen.querySelectorAll('.text-9xl, .text-8xl, .text-2xl, .text-5xl')
     const svgPath = textEachScreen.querySelector(".svg-path");
-    console.log(svgPath)
-    textScreen.forEach(el =>{
-      const textSpans = el.querySelectorAll('.text-animate')
-      if(indexScreen == 1){
-        startValue = "40% 80%";
-        endValue = "70% 80%";
-      }else if(indexScreen == 2){
-        startValue = "10% 90%";
-        endValue = "70% 90%";
-      }else if(indexScreen == 3){
-        startValue = "30% 90%"
-        endValue = "100% 90%"
-      }else if(indexScreen == 4){
-        startValue = "10% 90%"
-        endValue = "80% 90%"
-      }else if(indexScreen == 5){
-        startValue = "10% 80%"
-        endValue = "80% 80%"  
-      }
-      gsap.from(textSpans, {
-        y: 120,
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: el,
-          containerAnimation: mainTimeline,
-          start: startValue,
-          end: endValue,
-          toggleActions: "play none none none",
-          scrub: true,
-          markers: true
-        },
-      })
+    const textSpans = textEachScreen.querySelectorAll('.text-animate')
+    masterTimeline.from(textSpans, {
+      y: 120,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: textEachScreen,
+        containerAnimation: masterTimeline,
+        start: "center right",
+        end: "75% right",
+        toggleActions: "play none none none",
+        scrub: true,
+        markers: true,
+        markers: {startColor: "cyan", endColor: "cyan"},
+      },
     })
 
     if(svgPath == null) return;
-    if(indexScreen == 2){
-      startValue = "50% 80%";
-      endValue = "120% 80%";
-    }else if(indexScreen == 4){ 
-      startValue = "-50% center";
-      endValue = "30% center";
-    }else if(indexScreen == 5){ 
-      startValue = "-20% center";
-      endValue = "40% center";
-    }
     gsap.from(svgPath, {
       drawSVG: 0,
       ease: "none",
       scrollTrigger: {
-        markers: true,
         trigger: textEachScreen,
-        containerAnimation: mainTimeline,
-        start: startValue,
-        end: endValue,
+        containerAnimation: masterTimeline,
+        start: "center right",
+        start: "right right",
         scrub: true,
         toggleActions: "play none none none",
+        markers: {startColor: "yellow", endColor: "yellow"},
       },
     })
   }
 })
 
-const textScreenOne = screenScroll[0].querySelectorAll('.text-9xl, .text-8xl, .text-2xl, .text-5xl')
-textScreenOne.forEach(el =>{
-const textSpans = el.querySelectorAll('.text-animate')
+const textSpans = screenScroll[0].querySelectorAll('.text-animate')
 gsap.from(textSpans, {
-    y: 120,
-    stagger: 0.2,
-    scrollTrigger: {
-      trigger: el,
-      start: "-150% 30%",
-      end: "150% 30%",
-      toggleActions: "play none none none",
-      scrub: 1
-    },
-  })
+  y: 120,
+  stagger: 0.2,
+  scrollTrigger: {
+    trigger: screenScroll[0],
+    start: "-50% 0%",
+    end: "50% 00%",
+    toggleActions: "play none none none",
+    scrub: 1,
+    markers: true,
+  },
 })
+
+
+const yearSpan = document.querySelector('#year')
+yearSpan.textContent = new Date().getFullYear();

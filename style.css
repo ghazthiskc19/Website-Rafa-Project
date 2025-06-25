@@ -1,42 +1,8 @@
-
-.quote{
-    position: relative;
-}
-.quote::before, .quote::after{
-    content: '';
-    display: block;
-    background-image: url("./src/image/quote.png");
-    width: 100px;
-    height: 100px;
-    background-size: contain;
-    position: absolute;
-    opacity: 0.7;
+.icon-svg{
+    width: 100px !important;
+    height: 100px !important;
 }
 
-.quote::before{
-    top: -5%;
-    left: -5%;
-}
-.quote::after{
-    bottom: -5%;
-    right: -5%;
-    background-image: url("./src/image/double-quotes.png");
-}
-
-.quote::before.qoute-left{
-    top: -10%;
-    left: -10%
-}
-.quote::before.qoute-left{
-    bottom: 0;
-    right: 0;
-}
-
-.quote.qoute-right::before{
-    top: 0;
-    left: 0;
-}
-.quote.qoute-right::before{
-    bottom: -10%;
-    right: -10%
+.slide-fix{
+    clip-path: ellipse(80% 0% at 50% 99%);
 }
